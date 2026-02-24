@@ -76,14 +76,9 @@
       </section>
 
       <section class="downloads card" id="downloads">
-        <h2>Download bundles (v0.1.0)</h2>
-        <div class="download-grid">
-          <a class="btn" href="https://github.com/ioma8/mermap/releases/download/v0.1.0/Mermap_0.1.0_aarch64.dmg">macOS (Apple Silicon .dmg)</a>
-          <a class="btn" href="https://github.com/ioma8/mermap/releases/download/v0.1.0/Mermap_0.1.0_x64-setup.exe">Windows (.exe installer)</a>
-          <a class="btn" href="https://github.com/ioma8/mermap/releases/download/v0.1.0/Mermap_0.1.0_x64_en-US.msi">Windows (.msi)</a>
-          <a class="btn" href="https://github.com/ioma8/mermap/releases/download/v0.1.0/Mermap_0.1.0_amd64.AppImage">Linux (.AppImage)</a>
-          <a class="btn" href="https://github.com/ioma8/mermap/releases/download/v0.1.0/Mermap_0.1.0_amd64.deb">Linux (.deb)</a>
-          <a class="btn" href="https://github.com/ioma8/mermap/releases/download/v0.1.0/Mermap-0.1.0-1.x86_64.rpm">Linux (.rpm)</a>
+        <h2 id="downloads-title">Download bundles (latest)</h2>
+        <div class="download-grid" id="download-grid">
+          <p class="downloads-note">Loading latest release assets...</p>
         </div>
       </section>
     </main>
@@ -91,5 +86,67 @@
     <footer>
       <p>Built with Tauri + Preact + Mermaid. © Mermap</p>
     </footer>
+
+    <script>
+      (function () {
+        const repo = "ioma8/mermap-pages";
+        const apiUrl = `https://api.github.com/repos/${repo}/releases/latest`;
+        const grid = document.getElementById("download-grid");
+        const title = document.getElementById("downloads-title");
+        if (!grid || !title) return;
+
+        function classify(name) {
+          const lower = name.toLowerCase();
+          if (lower.endsWith(".dmg")) return "macOS (.dmg)";
+          if (lower.endsWith(".exe")) return "Windows (.exe installer)";
+          if (lower.endsWith(".msi")) return "Windows (.msi)";
+          if (lower.endsWith(".appimage")) return "Linux (.AppImage)";
+          if (lower.endsWith(".deb")) return "Linux (.deb)";
+          if (lower.endsWith(".rpm")) return "Linux (.rpm)";
+          if (lower.endsWith(".zip")) return "Archive (.zip)";
+          if (lower.endsWith(".tar.gz")) return "Archive (.tar.gz)";
+          return null;
+        }
+
+        fetch(apiUrl, { headers: { Accept: "application/vnd.github+json" } })
+          .then((res) => {
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.json();
+          })
+          .then((release) => {
+            const tag = release.tag_name || "latest";
+            title.textContent = `Download bundles (${tag})`;
+
+            const seen = new Set();
+            const items = (release.assets || [])
+              .map((asset) => {
+                const label = classify(asset.name || "");
+                if (!label) return null;
+                if (seen.has(label)) return null;
+                seen.add(label);
+                return { label, url: asset.browser_download_url };
+              })
+              .filter(Boolean);
+
+            if (!items.length) {
+              grid.innerHTML = '<p class="downloads-note">No downloadable assets found in the latest release yet.</p>';
+              return;
+            }
+
+            grid.innerHTML = "";
+            for (const item of items) {
+              const a = document.createElement("a");
+              a.className = "btn";
+              a.href = item.url;
+              a.textContent = item.label;
+              grid.appendChild(a);
+            }
+          })
+          .catch(() => {
+            grid.innerHTML =
+              '<p class="downloads-note">Could not load assets automatically. Open releases: <a href="https://github.com/ioma8/mermap-pages/releases">ioma8/mermap-pages/releases</a></p>';
+          });
+      })();
+    </script>
   </body>
 </html>

@@ -180,6 +180,16 @@ h1 {
   gap: 6px;
 }
 
+.downloads-note {
+  margin: 0;
+  font-size: 14px;
+  color: #475569;
+}
+
+.downloads-note a {
+  color: #0b7f82;
+}
+
 .download-grid .btn {
   justify-content: flex-start;
   width: 100%;
