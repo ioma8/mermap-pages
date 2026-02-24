@@ -130,6 +130,23 @@ h1 {
   gap: 14px;
 }
 
+.preview {
+  margin-top: 18px;
+  padding: 12px;
+}
+
+.preview h2 {
+  margin: 4px 6px 12px;
+}
+
+.app-shot {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid #d3ddea;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
+}
+
 .card,
 .downloads {
   background: var(--card);
@@ -141,16 +158,23 @@ h1 {
 
 .downloads {
   margin-top: 14px;
+  padding: 14px;
+}
+
+.downloads h2 {
+  margin: 4px 6px 12px;
 }
 
 .download-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .download-grid .btn {
   justify-content: flex-start;
+  width: 100%;
+  min-height: 44px;
 }
 
 h2 {
