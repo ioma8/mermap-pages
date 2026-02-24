@@ -64,7 +64,7 @@ footer {
 }
 
 .hero {
-  padding-top: 36px;
+  padding-top: 28px;
 }
 
 .eyebrow {
@@ -86,14 +86,14 @@ h1 {
 }
 
 .lead {
-  margin-top: 12px;
+  margin-top: 10px;
   max-width: 620px;
   font-size: clamp(17px, 2.3vw, 21px);
   color: var(--muted);
 }
 
 .cta-row {
-  margin-top: 18px;
+  margin-top: 14px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
@@ -131,31 +131,24 @@ h1 {
 }
 
 .preview {
-  margin-top: 14px;
-  padding: 10px;
+  margin-top: 12px;
+  padding: 0;
 }
 
 .preview h2 {
-  margin: 2px 6px 8px;
-}
-
-.shot-wrap {
-  border: 1px solid #dbe4ef;
-  border-radius: 10px;
-  background: #f8fbff;
-  padding: 10px;
+  margin: 0 0 8px;
 }
 
 .app-shot {
   width: 100%;
-  max-width: 780px;
-  max-height: 430px;
+  max-width: 760px;
+  max-height: 410px;
   display: block;
-  margin: 0 auto;
+  margin: 0;
   object-fit: contain;
   border-radius: 10px;
-  border: 1px solid #d3ddea;
-  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+  border: 1px solid #dbe3ee;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.1);
 }
 
 .card,
@@ -168,12 +161,12 @@ h1 {
 }
 
 .downloads {
-  margin-top: 10px;
-  padding: 10px;
+  margin-top: 8px;
+  padding: 8px;
 }
 
 .downloads h2 {
-  margin: 2px 6px 8px;
+  margin: 2px 4px 8px;
 }
 
 .download-grid {
@@ -209,8 +202,8 @@ code {
 }
 
 footer {
-  padding-top: 14px;
-  padding-bottom: 18px;
+  padding-top: 10px;
+  padding-bottom: 14px;
   color: #64748b;
   font-size: 13px;
 }
